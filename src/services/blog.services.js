@@ -1,17 +1,17 @@
 import axios from 'axios';
 
 
-import process from "process";
+// import process from "process";
 
-const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+// const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
 
 
-const API_URL
-if (development) {
-  API_URL = 'http://localhost:5000';
-} else {
-  API_URL = 'https://limitless-plains-41559.herokuapp.com';
-}
+const API_URL = 'https://limitless-plains-41559.herokuapp.com';
+// if(development) {
+//   API_URL = 'http://localhost:5000';
+// } else {
+//   API_URL = 'https://limitless-plains-41559.herokuapp.com';
+// }
 
 class BlogService {
   async getBlog(id, setBlogPost) {
