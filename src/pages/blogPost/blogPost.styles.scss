@@ -1,0 +1,35 @@
+.blog-post{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: space-around;
+    margin: auto;
+    h1{
+        margin: 2rem 0 .5rem;
+        font-size: 3rem;
+        text-transform: Capitalize;
+         @media screen and (max-width:576px){
+       font-size: 2.5rem;
+    }
+    }
+    .details{
+        display: flex;
+        &>*{
+            margin-right: 1.5rem;
+            color: rgb(92, 92, 92);
+            font-weight: 400;
+            @media screen and (max-width:576px){
+        margin-right: .7rem;
+    }
+        }
+        margin: 1rem 0 2rem;
+    }
+    .content{
+        text-align: justify;
+        line-height: 1.3rem;
+    }
+    @media screen and (max-width:576px){
+        width: 90%;
+    }
+}

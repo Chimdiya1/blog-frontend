@@ -1,0 +1,50 @@
+.admin-card{
+        width: 50%;
+        display: flex!important;
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-between;
+        padding: 1rem;
+        margin: 8px auto;
+        border: 3px solid black;
+        height: 104px;
+        text-transform: capitalize;
+        h2{
+            font-weight: 400;
+        }
+        .info{
+            display: flex;
+            justify-content: space-between;
+            .author{
+                font-weight: 400;
+                color: rgb(58, 58, 58);
+            }
+            .date{
+                color: rgb(99, 99, 99);
+            }
+        }
+        .change{
+            display: flex;
+            justify-content: space-between;
+            .delete{
+                color:red;
+                &:hover{
+                    font-weight: 1000;
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+            .edit{
+                color: yellowgreen;
+                &:hover{
+                    font-weight: 1000;
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+        @media screen and (max-width:576px){
+            width: 85%;
+        }
+       
+    }

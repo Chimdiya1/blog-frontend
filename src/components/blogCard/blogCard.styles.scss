@@ -1,0 +1,51 @@
+.blog-card{
+        width: 50%;
+        display: flex!important;
+        flex-direction: column;
+        align-content: center;
+        justify-content: space-between;
+        padding: 1rem;
+        margin: 8px 0;
+        border: 3px solid rgb(153, 153, 153);
+        height: 104px;
+        text-transform: capitalize;
+        transition: .2s all ease-in-out;
+        h2{
+            font-weight: 400;
+        }
+        .info{
+            display: flex;
+            justify-content: space-between;
+            .author{
+                font-weight: 400;
+                color: rgb(58, 58, 58);
+            }
+            .date{
+                color: rgb(99, 99, 99);
+            }
+        }
+        .change{
+            display: flex;
+            justify-content: space-between;
+            .delete{
+                color:red;
+            }
+            .edit{
+                color: yellowgreen;
+            }
+        }
+        @media screen and (max-width:576px){
+            width: 95%;
+        }
+        &:hover{
+            background-color: black;
+            border: 3px solid white;
+            color: white;
+            .author{
+                color: rgb(255, 255, 255);
+            }
+            .date{
+                color: rgb(255, 255, 255);
+            }
+        }
+    }
