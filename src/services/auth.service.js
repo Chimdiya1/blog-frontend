@@ -1,8 +1,15 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
+import process from "process";
+
+const development = !process.env.NODE_ENV || process.env.NODE_ENV === 'development';
+
+
+
+
 const API_URL
-if (NODE_ENV === 'development') {
+if (development) {
   API_URL = 'http://localhost:5000';
 } else {
   API_URL = 'https://limitless-plains-41559.herokuapp.com';
