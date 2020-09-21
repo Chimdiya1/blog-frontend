@@ -15,11 +15,11 @@ const Home = () => {
           exactly want to do, Read and Write!!
         </div>
         <h2>Explore</h2>
-        {posts.map((post) => {
+        {posts.length>1?posts.map((post) => {
           return (
             <BlogCard to={`blog/${post._id}`} key={post._id} post={post} />
           );
-        })}
+        }):<h3>No Post</h3>}
       </div>
     );
 }
