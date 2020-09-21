@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   API_URL = 'http://localhost:5000';
 } else {
   API_URL = 'https://limitless-plains-41559.herokuapp.com';
