@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
 const API_URL
-if (process.env.NODE_ENV === 'development') {
+if (NODE_ENV === 'development') {
   API_URL = 'http://localhost:5000';
 } else {
   API_URL = 'https://limitless-plains-41559.herokuapp.com';
