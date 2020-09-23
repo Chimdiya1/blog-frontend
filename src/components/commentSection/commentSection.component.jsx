@@ -2,15 +2,20 @@ import React, { useState } from 'react';
 import BlogService from '../../services/blog.services';
 import './commentSection.styles.scss';
 const CommentSection = ({ history, BlogPost }) => {
+  const [loading, setLoading] = useState(false);
   const handleInputChange = (e) =>
     setInput({
       ...input,
       [e.currentTarget.name]: e.currentTarget.value,
     });
   const handleSubmit = (e) => {
+    setLoading(true);
     e.preventDefault();
-    BlogService.comment(BlogPost._id, input.name, input.content);
-    history.go(0);
+    BlogService.comment(BlogPost._id, input.name, input.content).then(() => {
+      setLoading(false);
+      history.go(0);
+    })
+    
   };
   const [input, setInput] = useState({});
   return (
@@ -19,7 +24,7 @@ const CommentSection = ({ history, BlogPost }) => {
       <div>
         {BlogPost.comments.length >= 1
           ? BlogPost.comments.map((blog) => (
-              <div className='comment-block' key={blog.content* Math.random()}>
+              <div className="comment-block" key={blog.content * Math.random()}>
                 <p>{blog.name}</p>
                 <p>{blog.content}</p>
               </div>
@@ -48,7 +53,11 @@ const CommentSection = ({ history, BlogPost }) => {
             onChange={handleInputChange}
           />
         </div>
-        <input className="submit" type="submit" value="COMMENT" />
+        {loading === true ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <input className="submit" type="submit" value="COMMENT" />
+        )}
       </form>
     </div>
   );

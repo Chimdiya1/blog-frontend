@@ -3,7 +3,8 @@
     border: 3px solid rgb(153, 153, 153);
     width: 50%;
     padding: 2rem;
-    margin-top: 5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     color: rgb(80, 80, 80);
     @media screen and (max-width:576px){
             width: 90%;
@@ -79,5 +80,18 @@
         color: rgb(0, 0, 0);
         border: 1px solid black;
         }
+    }
+    .loading{
+        width: 100%;
+        padding: .5rem;
+        height: 3rem;
+        margin-top: 1rem;
+        font-size: 1.2rem;
+        background-color: rgb(54, 54, 54);
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

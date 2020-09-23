@@ -5,7 +5,7 @@ import './createBlog.styles.scss';
 
 const CreateBlog = ({ user,history }) => {
   const [input, setInput] = useState({});
-
+  const [loading, setLoading] = useState(false);
   const handleEditorChange = (e) => {
     setInput({
       ...input,
@@ -20,8 +20,10 @@ const CreateBlog = ({ user,history }) => {
     });
   const handleSubmit = (e) => {
     e.preventDefault();
-      BlogService.createBlogPost(input);
+    BlogService.createBlogPost(input, setLoading).then(() => {
       history.push('/');
+    });
+      
   };
 
   return (
@@ -61,10 +63,13 @@ const CreateBlog = ({ user,history }) => {
             bullist numlist outdent indent | help',
             }}
             onChange={handleEditorChange}
-            onBeforeRenderUI={() => console.log('before')}
           />
         </div>
-        <input className="submit" type="submit" />
+        {loading === true ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <input className="submit" type="submit" value="Submit" />
+        )}
       </form>
     </div>
   );

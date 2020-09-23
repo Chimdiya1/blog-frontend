@@ -27,9 +27,14 @@
     }
     .content{
         text-align: justify;
-        line-height: 1.3rem;
+        line-height: 1.6rem;
     }
     @media screen and (max-width:576px){
         width: 90%;
     }
+}
+.load{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -7,6 +7,7 @@ const Signup = (props) => {
   const [error, setError] = useState(false);
   const [errors, setErrors] = useState([]);
   const [match, setMatch] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     setInput({
@@ -27,6 +28,7 @@ const Signup = (props) => {
   };
 
   const signup = (e) => {
+    setLoading(true);
     e.preventDefault();
     AuthService.signup(
       input.username,
@@ -38,8 +40,9 @@ const Signup = (props) => {
         if (res.err === true) {
           setError(true);
           setErrors(res.errors.errors)
-          
-        }else{
+          setLoading(false);
+        } else {
+          setLoading(false);
           props.history.push('/login');
         }
       })
@@ -50,16 +53,28 @@ const Signup = (props) => {
       <form onSubmit={signup}>
         {error
           ? errors.map((err) => (
-              <p key={err.msg} className={`error ${error ? 'show' : ''}`}>{err.msg}</p>
+              <p key={err.msg} className={`error ${error ? 'show' : ''}`}>
+                {err.msg}
+              </p>
             ))
           : ''}
         <div className="input-group">
           <label>Username</label>
-          <input type="text" required name="username" onChange={handleInputChange} />
+          <input
+            type="text"
+            required
+            name="username"
+            onChange={handleInputChange}
+          />
         </div>
         <div className="input-group">
           <label>Email</label>
-          <input type="email" required name="email" onChange={handleInputChange} />
+          <input
+            type="email"
+            required
+            name="email"
+            onChange={handleInputChange}
+          />
         </div>
         <div className="input-group">
           <label>Password</label>
@@ -88,7 +103,11 @@ const Signup = (props) => {
         <p className={`pw-match ${match ? 'show' : ''}`}>
           *passwords do not match
         </p>
-        <input className="submit" type="submit" />
+        {loading === true ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <input className="submit" type="submit" value="Join Blogy" />
+        )}
       </form>
     </div>
   );

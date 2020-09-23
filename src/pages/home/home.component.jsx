@@ -2,11 +2,13 @@ import React, {useState,useEffect} from 'react'
 import './home.styles.scss'
 import BlogService from '../../services/blog.services'
 import BlogCard from '../../components/blogCard/blogCard.component'
+import Spinner from '../../components/spinner/spinner.component'
 const Home = () => {
     const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
     
     useEffect(() => {
-      BlogService.getPosts(setPosts);
+      BlogService.getPosts(setPosts, setLoading);
     }, []);
     return (
       <div className="home" >
@@ -15,7 +17,8 @@ const Home = () => {
           exactly want to do, Read and Write!!
         </div>
         <h2>Explore</h2>
-        {posts.length>1?posts.map((post) => {
+        {
+          loading === true ? <Spinner /> : posts.length>=1?posts.map((post) => {
           return (
             <BlogCard to={`blog/${post._id}`} key={post._id} post={post} />
           );

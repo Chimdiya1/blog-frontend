@@ -14,7 +14,8 @@ const API_URL = 'https://limitless-plains-41559.herokuapp.com';
 // }
 
 class BlogService {
-  async getBlog(id, setBlogPost) {
+  async getBlog(id, setBlogPost, setLoading) {
+    setLoading(true);
     const blog = await axios({
       url: `${API_URL}/blog/${id}`,
       headers: {
@@ -22,13 +23,14 @@ class BlogService {
         Authorization: 'Bearer ',
       },
       method: 'get',
-    })
-      setBlogPost(blog.data);
-      console.log(blog)
-    ;
+    });
+    setBlogPost(blog.data);
+    setLoading(false);
+    console.log(blog);
   }
 
-  async getPosts(setPosts) {
+  async getPosts(setPosts, setLoading) {
+    setLoading(true);
     try {
       const posts = await axios({
         url: `${API_URL}/blog`,
@@ -39,15 +41,16 @@ class BlogService {
         method: 'get',
       });
       setPosts(posts.data);
-      console.log(posts.data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
     }
   }
 
-  async getAllUserPosts(setPosts,user) {
-      try {
-        console.log(user)
+  async getAllUserPosts(setPosts, user, setLoading) {
+    setLoading(true);
+    try {
+      console.log(user);
       const posts = await axios({
         url: `${API_URL}/blog/all/${user._id}`,
         headers: {
@@ -57,13 +60,15 @@ class BlogService {
         method: 'get',
       });
       setPosts(posts.data);
+      setLoading(false);
       console.log(posts.data);
     } catch (err) {
       console.log(err);
     }
   }
 
-  async createBlogPost({ title, content }) {
+  async createBlogPost({ title, content }, setLoading) {
+    setLoading(true)
     let token = await localStorage.getItem('user').replace(/^"(.*)"$/, '$1');
     try {
       const result = await axios({
@@ -79,16 +84,17 @@ class BlogService {
         method: 'post',
       });
       console.log(result.data);
+      setLoading(false)
     } catch (err) {
       console.log(err);
     }
   }
-  async comment(id, name, content ) {
+  async comment(id, name, content) {
     try {
       const result = await axios({
         url: `${API_URL}/comment`,
         data: {
-          id:id,
+          id: id,
           name: name,
           content: content,
         },
@@ -103,7 +109,7 @@ class BlogService {
       console.log(err);
     }
   }
-  async deletePost(postId ) {
+  async deletePost(postId) {
     let token = await localStorage.getItem('user').replace(/^"(.*)"$/, '$1');
     try {
       const result = await axios({
@@ -119,12 +125,12 @@ class BlogService {
       console.log(err);
     }
   }
-  async editPost(postId,input) {
+  async editPost(postId, input) {
     let token = await localStorage.getItem('user').replace(/^"(.*)"$/, '$1');
     try {
       const result = await axios({
-          url: `${API_URL}/blog/${postId}`,
-          data: {
+        url: `${API_URL}/blog/${postId}`,
+        data: {
           title: input.title,
           content: input.content,
         },

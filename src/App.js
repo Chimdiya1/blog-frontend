@@ -12,7 +12,9 @@ import { Switch, Route } from 'react-router-dom';
 import AuthService from './services/auth.service'
 import Header from './components/header/header.component'
 import ProtectedRoute from './pages/protectedRoute/protectedRoute'
-
+import Footer from './components/footer/footer.component'
+import NotFound from './pages/404.component'
+import ErrorBoundary from './components/errorboundary.component'
 function App() {
   const [user, setUser] = useState({})
   const [authenticated, setAuthenticated] = useState(true)
@@ -36,47 +38,51 @@ function App() {
     <div className="App">
       <Header user={user} authenticated={authenticated} />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <ProtectedRoute
-          exact
-          path="/blog/create"
-          redirect={'/'}
-          authenticated={authenticated}
-          user={user}
-          component={CreateBlog}
-        />
-        <ProtectedRoute
-          exact
-          path="/blog/edit/:id"
-          redirect={'/'}
-          authenticated={authenticated}
-          user={user}
-          component={EditBlog}
-        />
-        <Route exact path="/blog/:id" component={BlogPost} />
-        <ProtectedRoute
-          exact
-          path="/login"
-          redirect={'/'}
-          authenticated={!authenticated}
-          component={LogIn}
-        />
-        <ProtectedRoute
-          exact
-          path="/dashboard"
-          redirect={'/login'}
-          authenticated={authenticated}
-          user={user}
-          component={Dashboard}
-        />
-        <ProtectedRoute
-          exact
-          path="/signup"
-          redirect={'/'}
-          authenticated={!authenticated}
-          component={SignUp}
-        />
+        <ErrorBoundary>
+          <Route exact path="/" component={Home} />
+          <ProtectedRoute
+            exact
+            path="/blog/create"
+            redirect={'/'}
+            authenticated={authenticated}
+            user={user}
+            component={CreateBlog}
+          />
+          <ProtectedRoute
+            exact
+            path="/blog/edit/:id"
+            redirect={'/'}
+            authenticated={authenticated}
+            user={user}
+            component={EditBlog}
+          />
+          <Route exact path="/blog/:id" component={BlogPost} />
+          <ProtectedRoute
+            exact
+            path="/login"
+            redirect={'/'}
+            authenticated={!authenticated}
+            component={LogIn}
+          />
+          <ProtectedRoute
+            exact
+            path="/dashboard"
+            redirect={'/login'}
+            authenticated={authenticated}
+            user={user}
+            component={Dashboard}
+          />
+          <ProtectedRoute
+            exact
+            path="/signup"
+            redirect={'/'}
+            authenticated={!authenticated}
+            component={SignUp}
+          />
+          {/* <Route component={NotFound} /> */}
+        </ErrorBoundary>
       </Switch>
+      <Footer />
     </div>
   );
 }

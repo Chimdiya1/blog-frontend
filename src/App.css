@@ -1,5 +1,7 @@
 .App {
   font-family: 'Kumbh Sans', sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
 .App-logo {

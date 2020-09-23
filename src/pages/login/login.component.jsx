@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import AuthService from '../../services/auth.service';
 import './login.styles.scss';
-
+import Spinner from '../../components/spinner/spinner.component'
 
 const LogIn = (props) => {
   const [input, setInput] = useState({});
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleInputChange = (e) => {
     
@@ -17,33 +18,51 @@ const LogIn = (props) => {
   };
 
   const login = (e) => {
+    setLoading(true);
     e.preventDefault();
     console.log(input);
     AuthService.login(input.email, input.password)
       .then((err, token) => {
-        console.log(token);
+        setLoading(false);
         props.history.push('/');
         props.history.go(0);
       })
       .catch((err) => {
         console.log(err)
         setError(true)
+        setLoading(false);
       });
   };
   return (
     <div className="log-in">
       <h2>Log in to your account</h2>
-      <form>
-        <p className={`error ${error?'show' :''}`}>Email or Password Invalid</p>
+      <form onSubmit={login}>
+        <p className={`error ${error ? 'show' : ''}`}>
+          Email or Password Invalid
+        </p>
         <div className="input-group">
           <label>Email Address</label>
-          <input type="text" name="email" onChange={handleInputChange} />
+          <input
+            type="text"
+            required
+            name="email"
+            onChange={handleInputChange}
+          />
         </div>
         <div className="input-group">
           <label>Password</label>
-          <input type="password" name="password" onChange={handleInputChange} />
+          <input
+            type="password"
+            required
+            name="password"
+            onChange={handleInputChange}
+          />
         </div>
-        <input className='submit' type="submit" onClick={login} />
+        {loading === true ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <input className="submit" type="submit" value="Log In" />
+        )}
       </form>
     </div>
   );

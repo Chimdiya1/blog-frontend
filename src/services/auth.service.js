@@ -31,7 +31,7 @@ class AuthService {
         localStorage.setItem('user', JSON.stringify(response.data.token));
         return response.data.token;
       } else {
-        console.log('error on line 26 in auth.service');
+        console.log('error ');
       }
     });
   }
